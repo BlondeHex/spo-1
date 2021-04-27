@@ -1,4 +1,4 @@
-#pragma once
+#pragma first
 
 #include <byteswap.h>
 

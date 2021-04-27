@@ -1,4 +1,4 @@
-#pragma once
+#pragma first
 
 #include <stddef.h>
 #include "hfs_plus_data_structures.h"
