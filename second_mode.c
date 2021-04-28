@@ -1,5 +1,9 @@
 #include "second_mode.h"
 
+void handle_command(char *input){
+  printf("test");
+}
+
 int second_mode(char *filePath) {
     FileSystem *fileSystem = openFileSystem(filePath);
     if (fileSystem != NULL) {
@@ -14,7 +18,7 @@ int second_mode(char *filePath) {
             }
             char *path = strtok(NULL, " \n");
             char *outPath = strtok(NULL, " \n");
-    
+            handle_command(command);
 
             if (strcmp(command, "exit") == 0) {
                 exitFlag = 1;
