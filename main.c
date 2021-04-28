@@ -1,6 +1,4 @@
 #include "main.h"
-#include "hfsplus_utils.h"
-
 
 int main(int argc, char **argv) {
 
