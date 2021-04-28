@@ -1,4 +1,4 @@
 #pragma first
 
-int shellMode(char *filePath)
+int second_mode(char *filePath)
 

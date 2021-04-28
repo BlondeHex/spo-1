@@ -8,7 +8,7 @@ int str_starts_with(char* src, char* substr) {
   }
 }
 
-int printList() {
+int first_mode() {
   DIR *device_dir;
   DIR *section_dir;
   struct dirent *device_dir_entry;

@@ -2,5 +2,5 @@
 
 #define SYSTEM_DIR "/sys/block/"
 
-int printList();
+int first_mode();
 

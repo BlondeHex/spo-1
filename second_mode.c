@@ -1,4 +1,4 @@
-int shellMode(char *filePath) {
+int second_mode(char *filePath) {
     FileSystem *fileSystem = openFileSystem(filePath);
     if (fileSystem != NULL) {
         int exitFlag = 0;
