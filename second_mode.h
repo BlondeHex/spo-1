@@ -5,5 +5,5 @@
 #include <dirent.h>
 #include <stdlib.h>
 
-int second_mode(char *filePath)
+int second_mode(char *filePath);
 
