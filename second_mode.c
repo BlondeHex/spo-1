@@ -5,7 +5,7 @@ void handle_command(char *command, char *path, char *outPath, int *flag, FileSys
     *flag = 0;
   } else if (strcmp(command, "help") == 0) {
     help();
-  } else if (strcmp(input, "ls") == 0) {
+  } else if (strcmp(command, "ls") == 0) {
     ls(fileSystem, path);
   } else if (strcmp(command, "pwd") == 0) {
     pwd(fileSystem);
