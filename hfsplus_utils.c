@@ -348,12 +348,12 @@ int copy(FileSystem *fileSystem, NodeInfo *info, char *path) {
 }
 
 void help() {
-printf("cd [directory] - change working directory\n");
-                printf("pwd - print working directory full name\n");
-                printf("cp - [directory] [target directory] - copy dir or file from mounted device\n");
-                printf("ls - show working directory elements\n");
-                printf("exit - terminate program\n");
-                printf("help - print help\n");
+    printf("cd [path] - change working directory\n");
+    printf("cp [input path] [output path] - copy\n");
+    printf("ls - show current directory elements\n");
+    printf("pwd - print current directory\n");
+    printf("exit - stop program\n");
+    printf("help - print help\n");
 }
 
 int *ls(FileSystem *fileSystem, char *path) {
