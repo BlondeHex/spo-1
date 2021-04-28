@@ -114,5 +114,4 @@ void reverseHFSPlusCatalogFile(HFSPlusCatalogFile *s) {
     s->textEncoding = bswap_32(s->textEncoding);
     reverseHFSPlusBSDInfo(&s->permissions);
     reverseHFSPlusForkData(&s->dataFork);
-    //reverseHFSPlusForkData(&s->resourceFork);
 }

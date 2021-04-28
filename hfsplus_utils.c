@@ -435,25 +435,20 @@ int *pwd(FileSystem *fileSystem) {
 int *cd(FileSystem *fileSystem, char *path) {
     char *output = malloc(1);
     output[0] = '\0';
-    if (path == NULL) {
-    printf("%s\n", output);
+    if (path != NULL) {
+        NodeInfo *info = findFileByPath(fileSystem, fileSystem->pwd, path);
+        if (info->id == 0) {
+            put("No such file or directory\n");
+        } else if (info->type != kHFSPlusFolderRecord) {
+            put("Not a directory\n") s;
+        } else if (info->id != kHFSRootParentID) {
+            fileSystem->pwd = info->id;
+        }
+        free(info);
+        printf("%s\n", output);
+        return 0;
+    }
     return -1;
-    }
-    NodeInfo *info = findFileByPath(fileSystem, fileSystem->pwd, path);
-    if (info->id == 0) {
-        char *message = "No such file or directory\n";
-        output = realloc(output, strlen(output) + strlen(message) + 1);
-        sprintf(output, "%s", message);
-    } else if (info->type != kHFSPlusFolderRecord) {
-        char *message = "Not a directory\n";
-        output = realloc(output, strlen(output) + strlen(message) + 1);
-        sprintf(output, "%s", message);
-    } else if (info->id != kHFSRootParentID) {
-        fileSystem->pwd = info->id;
-    }
-    free(info);
-    printf("%s\n", output);
-    return 0;
 }
 
 int *cp(FileSystem *fileSystem, char *path, char *outPath) {
