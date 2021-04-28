@@ -395,8 +395,10 @@ int *ls(FileSystem *fileSystem, char *path) {
 }
 
 void *pwd(FileSystem *fileSystem) {
-    char result[256];
     char name[256];
+    char tmp[256];
+    char result[256];
+    strcpy(tmp, "");
     strcpy(result, "");
     IterationData *input = malloc(sizeof(IterationData));
     input->targetID = fileSystem->pwd;
@@ -408,11 +410,10 @@ void *pwd(FileSystem *fileSystem) {
             strcpy(name, "");
         }
         strcat(name, "/");
-        char *tmp = malloc(strlen(result) + strlen(name) + 1);
         strcpy(tmp, name);
         strcat(tmp, result);
         strcpy(result, tmp);
-        free(tmp);
+        strcpy(tmp, "");
     }
     printf("%s\n", result);
     free(input);
