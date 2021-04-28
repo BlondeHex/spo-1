@@ -399,15 +399,13 @@ void *pwd(FileSystem *fileSystem) {
     output[0] = '\n';
     output[1] = '\0';
     char name[256];
+    strcpy(name, "");
     IterationData *input = malloc(sizeof(IterationData));
     input->targetID = fileSystem->pwd;
     input->parentID = 0;
     while (input->parentID != kHFSRootParentID) {
         catalogIteration(fileSystem, fileSystem->catalog->header->firstLeafNode, input, name, &nameByIdCallback);
         input->targetID = input->parentID;
-        if (input->parentID == kHFSRootParentID) {
-            strcpy(name, "");
-        }
         strcat(name, "/");
         output = realloc(output, strlen(output) + strlen(name) + 1);
         char *tmp = malloc(strlen(output) + strlen(name) + 1);
