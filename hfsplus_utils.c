@@ -365,18 +365,12 @@ int *ls(FileSystem *fileSystem, char *path) {
     }
     
     if (info->id == 0) {
-        char *message = "No such file or directory\n";
-        output = malloc(strlen(output) + strlen(message) + 1);
-        sprintf(output, "%s", message);
+        printf("No such file or directory\n");
         free(info);
-        printf("%s\n", output);
         return -1;
     } else if (info->type != kHFSPlusFolderRecord) {
-        char *message = "Not a directory\n";
-        output = malloc(strlen(output) + strlen(message) + 1);
-        sprintf(output, "%s", message);
+        printf("Not a directory\n");
         free(info);
-        printf("%s\n", output);
         return -1;
     }
     NodeInfoArray nodeInfoArray;
@@ -385,20 +379,15 @@ int *ls(FileSystem *fileSystem, char *path) {
     IterationData *input = malloc(sizeof(IterationData));
     input->targetID = info->id;
     catalogIteration(fileSystem, fileSystem->catalog->header->firstLeafNode, input, &nodeInfoArray, &lsCallback);
-    output = malloc(263 * nodeInfoArray.size);
-    output[0] = '\0';
-    char result[263]; //255 - maximal length of name, 7 - "FOLDER\t", 1 - "\0"
+   
     for (int i = 0; i < nodeInfoArray.size; i++) {
         if (nodeInfoArray.data[i].type == kHFSPlusFolderRecord) {
-            sprintf(result, "FOLDER\t%s\n", nodeInfoArray.data[i].nodeName);
-            strcat(output, result);
+            printf("FOLDER - %s\n", nodeInfoArray.data[i].nodeName);
         }
         if (nodeInfoArray.data[i].type == kHFSPlusFileRecord) {
-            sprintf(result, "FILE\t%s\n", nodeInfoArray.data[i].nodeName);
-            strcat(output, result);
+            printf("FILE - %s\n", nodeInfoArray.data[i].nodeName);
         }
     }
-    printf("%s\n", output);
     free(input);
     free(nodeInfoArray.data);
     free(info);
