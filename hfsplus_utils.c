@@ -395,10 +395,9 @@ int *ls(FileSystem *fileSystem, char *path) {
 }
 
 void *pwd(FileSystem *fileSystem) {
-    char *result = malloc(2);
-    result[0] = '\n';
-    result[1] = '\0';
+    char result[256];
     char name[256];
+    strcpy(result, "");
     IterationData *input = malloc(sizeof(IterationData));
     input->targetID = fileSystem->pwd;
     input->parentID = 0;
@@ -409,7 +408,6 @@ void *pwd(FileSystem *fileSystem) {
             strcpy(name, "");
         }
         strcat(name, "/");
-        result = realloc(result, strlen(result) + strlen(name) + 1);
         char *tmp = malloc(strlen(result) + strlen(name) + 1);
         strcpy(tmp, name);
         strcat(tmp, result);
