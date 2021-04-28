@@ -52,11 +52,6 @@ File *openFileFromFork(FileSystem *fileSystem, HFSPlusForkData *forkData) {
     return file;
 }
 
-void closeFile(File *file) {
-    free(file->data);
-    free(file);
-}
-
 BTree *openBTree(FileSystem *fileSystem, enum BTreeType type) {
     BTree *catalog = malloc(sizeof(BTree));
     if (type == typeAllocation) {
@@ -79,11 +74,6 @@ BTree *openBTree(FileSystem *fileSystem, enum BTreeType type) {
     return catalog;
 }
 
-void closeBTree(BTree *catalog) {
-    closeFile(catalog->file);
-    free(catalog);
-}
-
 Node *openNode(int node_num, BTree *tree) {
     if (node_num >= tree->header->totalNodes) {
         return NULL;
@@ -98,11 +88,6 @@ Node *openNode(int node_num, BTree *tree) {
         node->record_offsets[i] = bswap_16(node->record_offsets[i]);
     }
     return node;
-}
-
-void closeNode(Node *node) {
-    free(node->descriptor);
-    free(node);
 }
 
 Record *openRecord(int record_num, Node *node) {
@@ -124,6 +109,24 @@ Record *openRecord(int record_num, Node *node) {
 void closeRecord(Record *record) {
     free(record->data);
     free(record);
+}
+
+
+void closeBTree(BTree *catalog) {
+    closeFile(catalog->file);
+    free(catalog);
+}
+
+
+void closeFile(File *file) {
+    free(file->data);
+    free(file);
+}
+
+
+void closeNode(Node *node) {
+    free(node->descriptor);
+    free(node);
 }
 
 void convertNameToString(char *output, UInt16 *rawName, int nameLength) {
