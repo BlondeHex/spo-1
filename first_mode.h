@@ -5,7 +5,7 @@
 #include <dirent.h>
 #include <stdlib.h>
 
-#define SYSTEM_DIR "/sys/block/";
+#define SYSTEM_DIR "/sys/block/"
 
 int printList();
 
