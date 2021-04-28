@@ -432,7 +432,7 @@ int *pwd(FileSystem *fileSystem) {
     return 0;
 }
 
-int *cd(FileSystem *fileSystem, char *path) {
+void *cd(FileSystem *fileSystem, char *path) {
     if (path != NULL) {
         NodeInfo *info = findFileByPath(fileSystem, fileSystem->pwd, path);
         if (info->id == 0) {
@@ -443,9 +443,7 @@ int *cd(FileSystem *fileSystem, char *path) {
             fileSystem->pwd = info->id;
         }
         free(info);
-        return 0;
     }
-    return -1;
 }
 
 int *cp(FileSystem *fileSystem, char *path, char *outPath) {

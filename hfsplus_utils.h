@@ -90,6 +90,6 @@ int *ls(FileSystem *fileSystem, char *path);
 
 int *pwd(FileSystem *fileSystem);
 
-int *cd(FileSystem *fileSystem, char *path);
+void *cd(FileSystem *fileSystem, char *path);
 
 int *cp(FileSystem *fileSystem, char *path, char *outPath);
