@@ -1,15 +1,29 @@
 #include "second_mode.h"
 
-void handle_command(char *input){
-  printf("test");
+void handle_command(char *input, int *flag){
+  if (strcmp(input, "exit") == 0) {
+    *flag = 0;
+  } else if (strcmp(input, "help") == 0) {
+    help();
+  } else if (strcmp(input, "ls") == 0) {
+    ls(fileSystem, path);
+  } else if (strcmp(input, "pwd") == 0) {
+    pwd(fileSystem);
+  } else if (strcmp(input, "cd") == 0) {
+    cd(fileSystem, path);
+  } else if (strcmp(command, "cp") == 0) {
+    cp(fileSystem, path, outPath);
+  } else {
+    printf("Invalid command. Enter 'help'\n");
+  }
 }
 
 int second_mode(char *filePath) {
     FileSystem *fileSystem = openFileSystem(filePath);
     if (fileSystem != NULL) {
-        int exitFlag = 0;
+        int flag = 1;
         char *inputString = malloc(1024);
-        while (!exitFlag) {
+        while (flag) {
             printf("> ");
             fgets(inputString, 1024, stdin);
             char *command = strtok(inputString, " \n");
@@ -18,23 +32,9 @@ int second_mode(char *filePath) {
             }
             char *path = strtok(NULL, " \n");
             char *outPath = strtok(NULL, " \n");
-            handle_command(command);
+            handle_command(command, &flag);
 
-            if (strcmp(command, "exit") == 0) {
-                exitFlag = 1;
-            } else if (strcmp(command, "help") == 0) {
-                help();
-            } else if (strcmp(command, "ls") == 0) {
-                ls(fileSystem, path);
-            } else if (strcmp(command, "pwd") == 0) {
-                pwd(fileSystem);
-            } else if (strcmp(command, "cd") == 0) {
-                cd(fileSystem, path);
-            } else if (strcmp(command, "cp") == 0) {
-                cp(fileSystem, path, outPath);
-            } else {
-                printf("Wrong command. Enter 'help' to get help.\n");
-            }
+            
         }
         closeFileSystem(fileSystem);
         return 0;
