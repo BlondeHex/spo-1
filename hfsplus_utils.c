@@ -358,12 +358,12 @@ printf("cd [directory] - change working directory\n");
 
 int *ls(FileSystem *fileSystem, char *path) {
     NodeInfo *info;
-    char *output;
     if (path == NULL) {
         info = findFileByName(fileSystem, fileSystem->pwd, ".");
     } else {
         info = findFileByPath(fileSystem, fileSystem->pwd, path);
     }
+    
     if (info->id == 0) {
         char *message = "No such file or directory\n";
         output = malloc(strlen(output) + strlen(message) + 1);
@@ -405,7 +405,7 @@ int *ls(FileSystem *fileSystem, char *path) {
     return 0;
 }
 
-int *pwd(FileSystem *fileSystem) {
+void *pwd(FileSystem *fileSystem) {
     char *output = malloc(2);
     output[0] = '\n';
     output[1] = '\0';
@@ -429,7 +429,6 @@ int *pwd(FileSystem *fileSystem) {
     }
     free(input);
     printf("%s\n", output);
-    return 0;
 }
 
 void *cd(FileSystem *fileSystem, char *path) {

@@ -88,7 +88,7 @@ void help();
 
 int *ls(FileSystem *fileSystem, char *path);
 
-int *pwd(FileSystem *fileSystem);
+void *pwd(FileSystem *fileSystem);
 
 void *cd(FileSystem *fileSystem, char *path);
 
