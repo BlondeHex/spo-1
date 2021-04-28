@@ -433,19 +433,16 @@ int *pwd(FileSystem *fileSystem) {
 }
 
 int *cd(FileSystem *fileSystem, char *path) {
-    char *output = malloc(1);
-    output[0] = '\0';
     if (path != NULL) {
         NodeInfo *info = findFileByPath(fileSystem, fileSystem->pwd, path);
         if (info->id == 0) {
             put("No such file or directory\n");
         } else if (info->type != kHFSPlusFolderRecord) {
-            put("Not a directory\n") s;
+            put("Not a directory\n");
         } else if (info->id != kHFSRootParentID) {
             fileSystem->pwd = info->id;
         }
         free(info);
-        printf("%s\n", output);
         return 0;
     }
     return -1;
