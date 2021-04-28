@@ -1,15 +1,15 @@
 #include "second_mode.h"
 
-void handle_command(char *input, int *flag){
-  if (strcmp(input, "exit") == 0) {
+void handle_command(char *command, char *path, char *outPath, int *flag, FileSystem *fileSystem){
+  if (strcmp(command, "exit") == 0) {
     *flag = 0;
-  } else if (strcmp(input, "help") == 0) {
+  } else if (strcmp(command, "help") == 0) {
     help();
   } else if (strcmp(input, "ls") == 0) {
     ls(fileSystem, path);
-  } else if (strcmp(input, "pwd") == 0) {
+  } else if (strcmp(command, "pwd") == 0) {
     pwd(fileSystem);
-  } else if (strcmp(input, "cd") == 0) {
+  } else if (strcmp(command, "cd") == 0) {
     cd(fileSystem, path);
   } else if (strcmp(command, "cp") == 0) {
     cp(fileSystem, path, outPath);
@@ -32,7 +32,7 @@ int second_mode(char *filePath) {
             }
             char *path = strtok(NULL, " \n");
             char *outPath = strtok(NULL, " \n");
-            handle_command(command, &flag);
+            handle_command(command, path, outPath, &flag, fileSystem);
 
             
         }
