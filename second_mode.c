@@ -1,3 +1,5 @@
+#include "second_mode.h";
+
 int second_mode(char *filePath) {
     FileSystem *fileSystem = openFileSystem(filePath);
     if (fileSystem != NULL) {
