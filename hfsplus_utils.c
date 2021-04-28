@@ -436,9 +436,9 @@ int *cd(FileSystem *fileSystem, char *path) {
     if (path != NULL) {
         NodeInfo *info = findFileByPath(fileSystem, fileSystem->pwd, path);
         if (info->id == 0) {
-            put("No such file or directory\n");
+            printf("No such file or directory\n");
         } else if (info->type != kHFSPlusFolderRecord) {
-            put("Not a directory\n");
+            printf("Not a directory\n");
         } else if (info->id != kHFSRootParentID) {
             fileSystem->pwd = info->id;
         }
