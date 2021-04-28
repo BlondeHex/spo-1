@@ -395,27 +395,29 @@ int *ls(FileSystem *fileSystem, char *path) {
 }
 
 void *pwd(FileSystem *fileSystem) {
-    char *output = malloc(2);
-    output[0] = '\n';
-    output[1] = '\0';
+    char *result = malloc(2);
+    result[0] = '\n';
+    result[1] = '\0';
     char name[256];
-    strcpy(name, "");
     IterationData *input = malloc(sizeof(IterationData));
     input->targetID = fileSystem->pwd;
     input->parentID = 0;
     while (input->parentID != kHFSRootParentID) {
         catalogIteration(fileSystem, fileSystem->catalog->header->firstLeafNode, input, name, &nameByIdCallback);
         input->targetID = input->parentID;
+        if (input->parentID == kHFSRootParentID) {
+            strcpy(name, "");
+        }
         strcat(name, "/");
-        output = realloc(output, strlen(output) + strlen(name) + 1);
-        char *tmp = malloc(strlen(output) + strlen(name) + 1);
+        result = realloc(result, strlen(result) + strlen(name) + 1);
+        char *tmp = malloc(strlen(result) + strlen(name) + 1);
         strcpy(tmp, name);
-        strcat(tmp, output);
-        strcpy(output, tmp);
+        strcat(tmp, result);
+        strcpy(result, tmp);
         free(tmp);
     }
+    printf("%s\n", result);
     free(input);
-    printf("%s\n", output);
 }
 
 void *cd(FileSystem *fileSystem, char *path) {
