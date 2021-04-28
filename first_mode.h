@@ -1,8 +1,8 @@
 #pragma first
 
-#include "main.h"
+#include "main.h";
 
-#define SYSTEM_DIR "/sys/block/"
+#define SYSTEM_DIR "/sys/block/";
 
 int printList();
 

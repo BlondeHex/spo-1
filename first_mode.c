@@ -1,4 +1,4 @@
-#include "first_mode.h"
+#include "first_mode.h";
 
 int str_starts_with(char* src, char* substr) {
   if (strncmp(src, substr, strlen(substr)) == 0) {
