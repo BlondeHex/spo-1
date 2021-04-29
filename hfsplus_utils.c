@@ -359,7 +359,7 @@ void help() {
     printf("help - print help\n");
 }
 
-int *ls(FileSystem *fileSystem, char *path) {
+int ls(FileSystem *fileSystem, char *path) {
     NodeInfo *info;
     if (path == NULL) {
         info = findFileByName(fileSystem, fileSystem->pwd, ".");
@@ -397,7 +397,7 @@ int *ls(FileSystem *fileSystem, char *path) {
     return 0;
 }
 
-void *pwd(FileSystem *fileSystem) {
+void pwd(FileSystem *fileSystem) {
     char name[256];
     char tmp[256];
     char result[256];
@@ -422,7 +422,7 @@ void *pwd(FileSystem *fileSystem) {
     free(input);
 }
 
-void *cd(FileSystem *fileSystem, char *path) {
+void cd(FileSystem *fileSystem, char *path) {
     if (path != NULL) {
         NodeInfo *info = findFileByPath(fileSystem, fileSystem->pwd, path);
         if (info->id == 0) {
@@ -440,16 +440,24 @@ int *cp(FileSystem *fileSystem, char *path, char *outPath) {
     char *output = malloc(1);
     output[0] = '\0';
     if (path == NULL || outPath == NULL) {
-        printf("Empty path\n");
-        return -1;
+        char *message = "Empty path\n";
+        output = realloc(output, strlen(output) + strlen(message) + 1);
+        sprintf(output, "%s", message);
+        return 1;
     }
     NodeInfo *info = findFileByPath(fileSystem, fileSystem->pwd, path);
     if (info->id == 0) {
-        printf("No such file or directory\n");
+        char *message = "No such file or directory\n";
+        output = realloc(output, strlen(output) + strlen(message) + 1);
+        sprintf(output, "%s", message);
     } else if (copy(fileSystem, info, outPath) == 0) {
-        printf("Copied successfully\n");
+        char *message = "Copied successfully\n";
+        output = realloc(output, strlen(output) + strlen(message) + 1);
+        sprintf(output, "%s", message);
     } else {
-        printf("Error\n");
+        char *message = "Error\n";
+        output = realloc(output, strlen(output) + strlen(message) + 1);
+        sprintf(output, "%s", message);
     }
     free(info);
     return 0;

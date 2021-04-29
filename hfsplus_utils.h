@@ -86,10 +86,10 @@ void catalogIteration(FileSystem *fileSystem, UInt32 nodeNumber, IterationData *
 
 void help();
 
-int *ls(FileSystem *fileSystem, char *path);
+int ls(FileSystem *fileSystem, char *path);
 
-void *pwd(FileSystem *fileSystem);
+void pwd(FileSystem *fileSystem);
 
-void *cd(FileSystem *fileSystem, char *path);
+void cd(FileSystem *fileSystem, char *path);
 
-int *cp(FileSystem *fileSystem, char *path, char *outPath);
+int cp(FileSystem *fileSystem, char *path, char *outPath);
