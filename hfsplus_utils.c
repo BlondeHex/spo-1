@@ -436,7 +436,7 @@ void cd(FileSystem *fileSystem, char *path) {
     }
 }
 
-int *cp(FileSystem *fileSystem, char *path, char *outPath) {
+int cp(FileSystem *fileSystem, char *path, char *outPath) {
     char *output = malloc(1);
     output[0] = '\0';
     if (path == NULL || outPath == NULL) {
