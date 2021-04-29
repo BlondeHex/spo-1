@@ -440,24 +440,16 @@ int cp(FileSystem *fileSystem, char *path, char *outPath) {
     char *output = malloc(1);
     output[0] = '\0';
     if (path == NULL || outPath == NULL) {
-        char *message = "Empty path\n";
-        output = realloc(output, strlen(output) + strlen(message) + 1);
-        sprintf(output, "%s", message);
+       printf("Empty path\n")
         return 1;
     }
     NodeInfo *info = findFileByPath(fileSystem, fileSystem->pwd, path);
     if (info->id == 0) {
-        char *message = "No such file or directory\n";
-        output = realloc(output, strlen(output) + strlen(message) + 1);
-        sprintf(output, "%s", message);
+        printf("No such file or directory\n";)
     } else if (copy(fileSystem, info, outPath) == 0) {
-        char *message = "Copied successfully\n";
-        output = realloc(output, strlen(output) + strlen(message) + 1);
-        sprintf(output, "%s", message);
+        printf("Successfull\n")
     } else {
-        char *message = "Error\n";
-        output = realloc(output, strlen(output) + strlen(message) + 1);
-        sprintf(output, "%s", message);
+        printf("Error\n")
     }
     free(info);
     return 0;
